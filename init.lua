@@ -1,6 +1,9 @@
 -- Init keybindings
 require("keybinding")
 
+-- Default options
+require "options"
+
 -- Config for lazy.nvim = package manager 
 local lazypath = vim.fn.stdpath("data") .. "/lazy/lazy.nvim"
 

@@ -13,6 +13,8 @@ config.setup({
 		documentation = config.config.window.bordered(),
 	},
 	mapping = config.mapping.preset.insert({
+        ["<C-p>"] = config.mapping.select_prev_item(),
+        ["<C-n>"] = config.mapping.select_next_item(),
 		["<C-b>"] = config.mapping.scroll_docs(-4),
 		["<C-f>"] = config.mapping.scroll_docs(4),
 		["<C-Space>"] = config.mapping.complete(),

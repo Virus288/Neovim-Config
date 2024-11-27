@@ -9,6 +9,5 @@ vim.cmd("set shiftwidth=2")
 vim.g.mapleader = " "
 vim.g.maplocalleader = "\\"
 
-
-
-
+vim.keymap.set("n", ";", ":", { desc = "CMD enter command mode" })
+vim.keymap.set("i", "jk", "<ESC>")

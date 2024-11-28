@@ -3,29 +3,40 @@ local config = require "neo-tree"
 -- Toggle neotree
 vim.keymap.set("n", "<C-n>", ":Neotree toggle filesystem right<CR>", { noremap = true, silent = true })
 
-config.setup({
+config.setup {
+  hide_hidden = false,
+  hide_dotfiles = false,
+  hide_gitignored = false,
+  close_if_last_window = false,
+  popup_border_style = "rounded",
+  enable_git_status = true,
+  enable_diagnostics = true,
+follow_current_file = {
+            enabled = true,
+            leave_dirs_open = false,
+          },
+  file_size = {
+    enabled = true,
+    required_width = 5,
+  },
+  type = {
+    enabled = false,
+  },
+  last_modified = {
+    enabled = true,
+    required_width = 5,
+  },
+  created = {
+    enabled = false,
+  },
+  symlink_target = {
+    enabled = false,
+  },
   filesystem = {
     window = {
       mappings = {
-        ["<BS>"] = function(state)
-          local node = state.tree:get_node() -- Get the currently selected node
-          if node then
-            if node.type == "directory" and node:is_expanded() then
-              -- If the node is a folder and expanded, fold it
-              state.commands.toggle_node(state)
-            -- else
-            --   -- Otherwise, attempt to fold the parent folder
-            --   local parent_id = node:get_parent_id()
-            --   if parent_id then
-            --     local parent_node = state.tree:get_node(parent_id)
-            --     if parent_node and parent_node.type == "directory" and parent_node:is_expanded() then
-            --       state.commands.toggle_node(state, parent_node)
-            --     end
-            --   end
-            end
-          end
-        end,
+        ["<BS>"] = "close_node",
       },
     },
   },
-})
+}

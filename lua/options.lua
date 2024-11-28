@@ -8,7 +8,7 @@ opt.inccommand = "split"
 opt.backspace = { "indent", "eol,start" }
 
 opt.ignorecase = true -- case insensitive searching
-opt.smartcase = true -- case-sensitive if expresson contains a capital letter
+opt.smartcase = true -- case-sensitive if expression contains a capital letter
 opt.hlsearch = true -- highlight search results
 opt.incsearch = true -- set incremental search, like modern browsers
 
@@ -49,7 +49,7 @@ opt.signcolumn = "yes" -- show the sign column
 opt.sidescrolloff = 8
 
 -- Tab control
-opt.expandtab = true -- use spaces intead of tabs
+opt.expandtab = true -- use spaces instead of tabs
 opt.smarttab = true -- tab respects 'tabstop', 'shiftwidth', and 'softtabstop'
 opt.tabstop = 4 -- the visible width of tabs
 opt.softtabstop = 4 -- edit as if the tabs are 4 characters wide

@@ -2,9 +2,9 @@ require('gitsigns').setup {
     signs = {
       add          = { text = '┃' },
       change       = { text = '┃' },
-      delete       = { text = '_' },
+      delete       = { text = '󰍵' },
       topdelete    = { text = '‾' },
-      changedelete = { text = '~' },
+      changedelete = { text = '󰍵' },
       untracked    = { text = '┆' },
     },
     signcolumn = true,  -- Toggle with `:Gitsigns toggle_signs`

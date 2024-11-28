@@ -1,38 +1,59 @@
+local config = require "lspconfig"
+local M = {}
+local capabilities = require("cmp_nvim_lsp").default_capabilities()
 
-local on_attach = require("nvchad.configs.lspconfig").on_attach
-local on_init = require("nvchad.configs.lspconfig").on_init
-local capabilities = require("nvchad.configs.lspconfig").capabilities
+capabilities.textDocument.completion.completionItem = {
+  documentationFormat = { "markdown", "plaintext" },
+  snippetSupport = true,
+  preselectSupport = true,
+  insertReplaceSupport = true,
+  labelDetailsSupport = true,
+  deprecatedSupport = true,
+  commitCharactersSupport = true,
+  tagSupport = { valueSet = { 1 } },
+  resolveSupport = {
+    properties = {
+      "documentation",
+      "detail",
+      "additionalTextEdits",
+    },
+  },
+}
 
--- load defaults i.e lua_lsp
-require("nvchad.configs.lspconfig").defaults()
-
-local lspconfig = require "lspconfig"
-
--- EXAMPLE
-local servers = { "html", "cssls" }
-local nvlsp = require "nvchad.configs.lspconfig"
-
--- lsps with default config
-for _, lsp in ipairs(servers) do
-  lspconfig[lsp].setup {
-    on_attach = nvlsp.on_attach,
-    on_init = nvlsp.on_init,
-    capabilities = nvlsp.capabilities,
-  }
-end
+vim.lsp.inlay_hint.enable(true)
 
 local function Organize_imports()
   local params = {
     command = "_typescript.organizeImports",
-    arguments = {vim.api.nvim_buf_get_name(0)},
+    arguments = { vim.api.nvim_buf_get_name(0) },
   }
   vim.lsp.buf.execute_command(params)
 end
 
--- typescript
-lspconfig.tsserver.setup {
-  on_attach = on_attach,
-  on_init = on_init,
+-- Lsp servers
+config.lua_ls.setup {
+  capabilities = capabilities,
+  on_init = M.on_init,
+
+  settings = {
+    Lua = {
+      diagnostics = {
+        globals = { "vim" },
+      },
+      workspace = {
+        library = {
+          vim.fn.expand "$VIMRUNTIME/lua",
+          vim.fn.expand "$VIMRUNTIME/lua/vim/lsp",
+          "${3rd}/luv/library",
+        },
+        maxPreload = 100000,
+        preloadFileSize = 10000,
+      },
+    },
+  },
+}
+
+config.ts_ls.setup {
   capabilities = capabilities,
   init_options = {
     preferences = {
@@ -40,34 +61,34 @@ lspconfig.tsserver.setup {
       includeCompletionsForModuleExports = true,
       includeCompletionsForImportStatements = true,
       importModuleSpecifierPreference = "relative",
-    }
+    },
   },
   filetypes = {
     "javascript",
-    "typescript"
+    "typescript",
   },
   commands = {
     OrganizeImports = {
       Organize_imports,
       description = "Organize imports",
-    }
+    },
   },
   settings = {
     typescript = {
       inlayHints = {
-        includeInlayParameterNameHints = 'all',
-        includeInlayParameterNameHintsWhenArgumentMatchesName = false,
+        includeInlayParameterNameHints = "all",
+        includeInlayParameterNameHintsWhenArgumentMatchesName = true,
         includeInlayFunctionParameterTypeHints = true,
         includeInlayVariableTypeHints = true,
-        includeInlayVariableTypeHintsWhenTypeMatchesName = false,
+        includeInlayVariableTypeHintsWhenTypeMatchesName = true,
         includeInlayPropertyDeclarationTypeHints = true,
         includeInlayFunctionLikeReturnTypeHints = true,
         includeInlayEnumMemberValueHints = true,
-      }
+      },
     },
     javascript = {
       inlayHints = {
-        includeInlayParameterNameHints = 'all',
+        includeInlayParameterNameHints = "all",
         includeInlayParameterNameHintsWhenArgumentMatchesName = false,
         includeInlayFunctionParameterTypeHints = true,
         includeInlayVariableTypeHints = true,
@@ -75,12 +96,10 @@ lspconfig.tsserver.setup {
         includeInlayPropertyDeclarationTypeHints = true,
         includeInlayFunctionLikeReturnTypeHints = true,
         includeInlayEnumMemberValueHints = true,
-      }
-    }
-  }
+      },
+    },
+  },
 }
-
-vim.lsp.inlay_hint.enable(true)
 
 -- Auto import missing files on save
 vim.api.nvim_create_autocmd("BufWritePre", {
@@ -88,32 +107,27 @@ vim.api.nvim_create_autocmd("BufWritePre", {
   desc = "TS_add_missing_imports",
   pattern = { "*.ts" },
   callback = function()
-    vim.lsp.buf.code_action({
+    vim.lsp.buf.code_action {
       apply = true,
       context = {
         only = { "source.addMissingImports.ts" },
       },
-    })
-    vim.cmd("write")
+    }
+    vim.cmd "write"
   end,
 })
+
 -- Typos and text checking
-require('lspconfig').typos_lsp.setup({
-    -- Logging level of the language server. Logs appear in :LspLog. Defaults to error.
-    cmd_env = { RUST_LOG = "error" },
-    init_options = {
-        -- Custom config. Used together with a config file found in the workspace or its parents,
-        -- taking precedence for settings declared in both.
-        -- Equivalent to the typos `--config` cli argument.
-        config = '~/code/typos-lsp/crates/typos-lsp/tests/typos.toml',
-        -- How typos are rendered in the editor, can be one of an Error, Warning, Info or Hint.
-        -- Defaults to error.
-        diagnosticSeverity = "Error"
-    }
-})
+config.typos_lsp.setup {
+  cmd_env = { RUST_LOG = "error" },
+  init_options = {
+    config = "~/code/typos-lsp/crates/typos-lsp/tests/typos.toml",
+    diagnosticSeverity = "Error",
+  },
+}
 
 -- Eslint
-lspconfig.eslint.setup({
+config.eslint.setup {
   capabilities = capabilities,
   flags = { debounce_text_changes = 500 },
   on_attach = function(client, bufnr)
@@ -123,10 +137,18 @@ lspconfig.eslint.setup({
       vim.api.nvim_create_autocmd("BufWritePost", {
         pattern = "*",
         callback = function()
-          vim.lsp.buf.format({ async = true })
+          vim.lsp.buf.format { async = true }
         end,
         group = au_lsp,
       })
     end
   end,
-})
+}
+
+-- Keybindings for code actions
+vim.keymap.set("n", "K", vim.lsp.buf.hover, {})
+vim.keymap.set("n", "gD", vim.lsp.buf.declaration)
+vim.keymap.set("n", "gd", vim.lsp.buf.definition)
+vim.keymap.set("n", "gi", vim.lsp.buf.implementation)
+vim.keymap.set("n", "gr", vim.lsp.buf.references)
+vim.keymap.set("n", "<leader>ca", vim.lsp.buf.code_action, {})

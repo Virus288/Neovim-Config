@@ -1,8 +1,10 @@
-require("neocord").setup({
+local config = require("neocord")
+
+config.setup({
     logo                = "auto",                     -- "auto" or url
     logo_tooltip        = nil,                        -- nil or string
     main_image          = "language",                 -- "language" or "logo"
-    client_id           = "1157438221865717891",      -- Use your own Discord application client id (not recommended)
+    client_id           = "1157438221865717891",
     log_level           = nil,                        -- Log messages at or above this level (one of the following: "debug", "info", "warn", "error")
     debounce_timeout    = 10,                         -- Number of seconds to debounce events (or calls to `:lua package.loaded.presence:update(<filename>, true)`)
     blacklist           = {},                         -- A list of strings or Lua patterns that disable Rich Presence if the current file name, path, or workspace matches

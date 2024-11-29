@@ -1,18 +1,25 @@
+require "nvchad.options"
+
 local opt = vim.opt
 local env = vim.env
 
-opt.history = 1000
+-- opt.confirm = false -- confirm changes before exiting a buffer
+-- opt.autowrite = true -- enable auto-write
+
+opt.history = 1000 -- store the last 1000 commands entered
+-- opt.textwidth = 120 -- after configured number of characters, wrap line
 
 opt.inccommand = "split"
 
-opt.backspace = { "indent", "eol,start" }
+opt.backspace = { "indent", "eol,start" } -- make backspace behave in a sane manner
+-- opt.mouse = "a" -- set mouse mode to all modes
 
 opt.ignorecase = true -- case insensitive searching
-opt.smartcase = true -- case-sensitive if expression contains a capital letter
+opt.smartcase = true -- case-sensitive if expresson contains a capital letter
 opt.hlsearch = true -- highlight search results
 opt.incsearch = true -- set incremental search, like modern browsers
 
-opt.magic = true
+opt.magic = true -- set magic on, for regular expressions
 
 -- Relative numbers
 opt.number = true
@@ -49,7 +56,7 @@ opt.signcolumn = "yes" -- show the sign column
 opt.sidescrolloff = 8
 
 -- Tab control
-opt.expandtab = true -- use spaces instead of tabs
+opt.expandtab = true -- use spaces intead of tabs
 opt.smarttab = true -- tab respects 'tabstop', 'shiftwidth', and 'softtabstop'
 opt.tabstop = 4 -- the visible width of tabs
 opt.softtabstop = 4 -- edit as if the tabs are 4 characters wide

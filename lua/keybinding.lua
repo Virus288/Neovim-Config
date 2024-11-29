@@ -21,3 +21,14 @@ vim.opt.clipboard = "unnamedplus"
 
 -- Move coursor to next line without ctr
 vim.opt.whichwrap:append("h,l,<,>,[,]")
+
+-- Git
+vim.keymap.set("n", "<leader>gt", "<cmd>Telescope git_status<CR>")
+vim.keymap.set("n", "<leader>cm", "<cmd>Telescope git_commits<CR>")
+
+-- Terminal
+vim.keymap.set("t", "<C-x>", "<C-\\><C-N>")
+
+-- Diagnostics
+vim.keymap.set("n", "<leader>ds", vim.diagnostic.setloclist, { desc = "LSP diagnostic loclist" })
+

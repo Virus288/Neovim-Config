@@ -30,7 +30,7 @@ local function Organize_imports()
 end
 
 -- typescript
-config.ts_ls.setup {
+require('lspconfig').ts_ls.setup {
   capabilities = capabilities,
   init_options = {
       preferences = {

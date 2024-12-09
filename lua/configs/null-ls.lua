@@ -1,4 +1,3 @@
-
 local config = require("null-ls")
 
 config.setup({
@@ -10,4 +9,9 @@ config.setup({
     },
 })
 
-vim.keymap.set("n", "<leader>gf", vim.lsp.buf.format)
+local function format()
+    vim.lsp.buf.format({ async = true })
+    vim.cmd("write")
+end
+
+vim.keymap.set("n", "<leader>gf", format)

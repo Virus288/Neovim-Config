@@ -1,6 +1,6 @@
-local config = require "lspconfig"
+local config = require("lspconfig")
 local M = {}
-local capabilities = require("cmp_nvim_lsp").default_capabilities()
+local capabilities = vim.lsp.protocol.make_client_capabilities()
 
 capabilities.textDocument.completion.completionItem = {
     documentationFormat = { "markdown", "plaintext" },
@@ -21,14 +21,6 @@ capabilities.textDocument.completion.completionItem = {
 }
 
 vim.lsp.inlay_hint.enable(true)
-
-local function Organize_imports()
-    local params = {
-        command = "_typescript.organizeImports",
-        arguments = { vim.api.nvim_buf_get_name(0) },
-    }
-    vim.lsp.buf.execute_command(params)
-end
 
 -- Lsp servers
 config.lua_ls.setup {
@@ -67,12 +59,6 @@ config.ts_ls.setup {
         "javascript",
         "typescript",
     },
-    commands = {
-        OrganizeImports = {
-            Organize_imports,
-            description = "Organize imports",
-        },
-    },
     settings = {
         typescript = {
             inlayHints = {
@@ -86,8 +72,8 @@ config.ts_ls.setup {
                 includeInlayEnumMemberValueHints = true,
             },
             experimental = {
-                updateImportsOnPaste = false, -- This options kills performance. Use only on more powerful machines
-                enableProjectDiagnostics = false,
+                updateImportsOnPaste = true,
+                enableProjectDiagnostics = true,
             },
             preferences = {
                 preferTypeOnlyAutoImports = true,
@@ -109,49 +95,48 @@ config.ts_ls.setup {
     },
 }
 
--- Auto import missing files on save
-vim.api.nvim_create_autocmd("BufWritePre", {
-    group = vim.api.nvim_create_augroup("TS_add_missing_imports", { clear = true }),
-    desc = "TS_add_missing_imports",
-    pattern = { "*.ts" },
-    callback = function()
-        vim.lsp.buf.code_action {
-            apply = true,
-            context = {
-                only = { "source.addMissingImports.ts" },
-            },
-        }
-        vim.cmd "write"
-    end,
-})
+-- -- Auto import missing files on save
+-- vim.api.nvim_create_autocmd("BufWritePre", {
+--     group = vim.api.nvim_create_augroup("TS_add_missing_imports", { clear = true }),
+--     desc = "TS_add_missing_imports",
+--     pattern = { "*.ts" },
+--     callback = function()
+--         vim.lsp.buf.code_action {
+--             apply = true,
+--             context = {
+--                 only = { "source.addMissingImports.ts" },
+--             },
+--         }
+--         vim.cmd "write"
+--     end,
+-- })
 
 -- Typos and text checking
-config.typos_lsp.setup {
-    cmd_env = { RUST_LOG = "error" },
+config.typos_lsp.setup{
     init_options = {
-        config = "~/code/typos-lsp/crates/typos-lsp/tests/typos.toml",
-        diagnosticSeverity = "Error",
-    },
+        config = vim.fn.expand('~/code/typos-lsp/crates/typos-lsp/tests/typos.toml'),  -- Path to configuration file
+        diagnosticSeverity = "Error",  -- Adjust based on your preference
+    }
 }
 
--- Eslint
-config.eslint.setup {
-    capabilities = capabilities,
-    flags = { debounce_text_changes = 500 },
-    on_attach = function(client, bufnr)
-        client.server_capabilities.documentFormattingProvider = true
-        if client.server_capabilities.documentFormattingProvider then
-            local au_lsp = vim.api.nvim_create_augroup("eslint_lsp", { clear = true })
-            vim.api.nvim_create_autocmd("BufWritePost", {
-                pattern = "*",
-                callback = function()
-                    vim.lsp.buf.format { async = true }
-                end,
-                group = au_lsp,
-            })
-        end
-    end,
-}
+-- -- Eslint
+-- config.eslint.setup {
+--     capabilities = capabilities,
+--     flags = { debounce_text_changes = 500 },
+--     on_attach = function(client, bufnr)
+--         client.server_capabilities.documentFormattingProvider = true
+--         if client.server_capabilities.documentFormattingProvider then
+--             local au_lsp = vim.api.nvim_create_augroup("eslint_lsp", { clear = true })
+--             vim.api.nvim_create_autocmd("BufWritePost", {
+--                 pattern = "*",
+--                 callback = function()
+--                     vim.lsp.buf.format { async = true }
+--                 end,
+--                 group = au_lsp,
+--             })
+--         end
+--     end,
+-- }
 
 -- Keybindings for code actions
 vim.keymap.set("n", "K", vim.lsp.buf.hover, {})

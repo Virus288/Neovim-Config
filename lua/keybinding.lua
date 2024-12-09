@@ -32,3 +32,9 @@ vim.keymap.set("t", "<C-x>", "<C-\\><C-N>")
 -- Diagnostics
 vim.keymap.set("n", "<leader>ds", vim.diagnostic.setloclist, { desc = "LSP diagnostic loclist" })
 
+-- Folding
+vim.o.foldmethod = 'syntax'
+vim.api.nvim_set_keymap('v', '<leader>zf', ':normal! zf<CR>', { noremap = true, silent = true })
+vim.api.nvim_set_keymap('v', '<leader>zc', ':normal! zc<CR>', { noremap = true, silent = true })
+vim.api.nvim_set_keymap('v', '<leader>zo', ':normal! zo<CR>', { noremap = true, silent = true })
+vim.api.nvim_set_keymap('v', '<leader>za', ':normal! za<CR>', { noremap = true, silent = true })

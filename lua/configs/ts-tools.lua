@@ -23,20 +23,12 @@ require("typescript-tools").setup {
             insertSpaceAfterOpeningAndBeforeClosingJsxExpressionBraces = true,
             insertSpaceAfterTypeAssertion = true,
             insertSpaceBeforeFunctionParenthesis = true,
-            placeOpenBraceOnNewLineForFunctions = true,
-            placeOpenBraceOnNewLineForControlBlocks = true,
+            placeOpenBraceOnNewLineForFunctions = false,
+            placeOpenBraceOnNewLineForControlBlocks = false,
             insertSpaceBeforeTypeAnnotation = true,
             semicolons = "insert",
         },
         tsserver_file_preferences = {
-            includeInlayParameterNameHints = "all",
-            includeCompletionsForModuleExports = true,
-            quotePreference = "auto",
-
-
-
-
-
             disableSuggestions = false,
             quotePreference = "single",
             includeCompletionsForModuleExports = true,

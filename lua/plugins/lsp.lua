@@ -1,23 +1,30 @@
 return {
-  {
-    "williamboman/mason.nvim",
-    config = function ()
-      require "configs.lsp"
-    end,
-  },
-  {
-    "williamboman/mason-lspconfig.nvim",
-    config = function()
-      require "configs.masonConfig" 
-    end
-  },
-  -- {
-  --   "neovim/nvim-lspconfig",
-  --   opts = {
-  --     inlay_hints = { enabled = true },
-  --     },
-  --   config = function()
-  --     require "configs.lspConfig" 
-  --   end
-  -- }
+    {
+        "williamboman/mason.nvim",
+        opts = {
+            ensure_installed = {
+                "lua-language-server",
+                "stylua",
+                "prettier",
+                "typescript-language-server",
+                "typos-lsp",
+                "eslint-lsp",
+            },
+        },
+    },
+    {
+        "williamboman/mason-lspconfig.nvim",
+        config = function()
+            require "configs.masonConfig"
+        end
+    },
+    {
+        "neovim/nvim-lspconfig",
+        opts = {
+            inlay_hints = { enabled = true },
+        },
+        config = function()
+            require "configs.lspConfig"
+        end
+    }
 }

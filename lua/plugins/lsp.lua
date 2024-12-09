@@ -11,13 +11,13 @@ return {
       require "configs.masonConfig" 
     end
   },
-  {
-    "neovim/nvim-lspconfig",
-    opts = {
-      inlay_hints = { enabled = true },
-      },
-    config = function()
-      require "configs.lspConfig" 
-    end
-  }
+  -- {
+  --   "neovim/nvim-lspconfig",
+  --   opts = {
+  --     inlay_hints = { enabled = true },
+  --     },
+  --   config = function()
+  --     require "configs.lspConfig" 
+  --   end
+  -- }
 }

@@ -63,8 +63,8 @@ require('lspconfig').ts_ls.setup {
               includeInlayEnumMemberValueHints = true,
           },
           experimental = {
-              updateImportsOnPaste = false, -- This options kills performance. Use only on more powerful machines
-              enableProjectDiagnostics = false,
+              updateImportsOnPaste = true,
+              enableProjectDiagnostics = true,
           },
           preferences = {
               preferTypeOnlyAutoImports = true,

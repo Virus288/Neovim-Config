@@ -38,3 +38,11 @@ vim.api.nvim_set_keymap('v', '<leader>zf', ':normal! zf<CR>', { noremap = true, 
 vim.api.nvim_set_keymap('v', '<leader>zc', ':normal! zc<CR>', { noremap = true, silent = true })
 vim.api.nvim_set_keymap('v', '<leader>zo', ':normal! zo<CR>', { noremap = true, silent = true })
 vim.api.nvim_set_keymap('v', '<leader>za', ':normal! za<CR>', { noremap = true, silent = true })
+
+-- Neovide
+if vim.g.neovide then
+    vim.g.neovide_scale_factor = 0.8 -- Set default scale factory to be 0.8, because its zoomed way more than neovim itself
+    vim.keymap.set({ "n", "v" }, "<C-+>", ":lua vim.g.neovide_scale_factor = vim.g.neovide_scale_factor + 0.1<CR>")
+    vim.keymap.set({ "n", "v" }, "<C-->", ":lua vim.g.neovide_scale_factor = vim.g.neovide_scale_factor - 0.1<CR>")
+    vim.keymap.set({ "n", "v" }, "<C-0>", ":lua vim.g.neovide_scale_factor = 1<CR>")
+end

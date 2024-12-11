@@ -5,7 +5,6 @@ return {
             ensure_installed = {
                 "lua-language-server",
                 "stylua",
-                "prettier",
                 "typescript-language-server",
                 "typos-lsp",
                 "eslint-lsp",

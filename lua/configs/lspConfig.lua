@@ -1,5 +1,4 @@
 local config = require("lspconfig")
-local M = {}
 local capabilities = vim.lsp.protocol.make_client_capabilities()
 
 capabilities.textDocument.completion.completionItem = {
@@ -20,12 +19,9 @@ capabilities.textDocument.completion.completionItem = {
     },
 }
 
-vim.lsp.inlay_hint.enable(true)
-
 -- Lsp servers
 config.lua_ls.setup {
     capabilities = capabilities,
-    on_init = M.on_init,
 
     settings = {
         Lua = {
@@ -96,47 +92,51 @@ config.ts_ls.setup {
 }
 
 -- -- Auto import missing files on save
--- vim.api.nvim_create_autocmd("BufWritePre", {
---     group = vim.api.nvim_create_augroup("TS_add_missing_imports", { clear = true }),
---     desc = "TS_add_missing_imports",
---     pattern = { "*.ts" },
---     callback = function()
---         vim.lsp.buf.code_action {
---             apply = true,
---             context = {
---                 only = { "source.addMissingImports.ts" },
---             },
---         }
---         vim.cmd "write"
---     end,
--- })
+vim.api.nvim_create_autocmd("BufWritePre", {
+    group = vim.api.nvim_create_augroup("TS_add_missing_imports", { clear = true }),
+    desc = "TS_add_missing_imports",
+    pattern = { "*.ts" },
+    callback = function()
+        vim.lsp.buf.code_action {
+            apply = true,
+            context = {
+                diagnostics = {},
+                only = { "refactor" },
+            },
+        }
+        vim.cmd "write"
+    end,
+})
 
 -- Typos and text checking
-config.typos_lsp.setup{
+config.typos_lsp.setup {
     init_options = {
-        config = vim.fn.expand('~/code/typos-lsp/crates/typos-lsp/tests/typos.toml'),  -- Path to configuration file
-        diagnosticSeverity = "Error",  -- Adjust based on your preference
+        config = vim.fn.expand('~/code/typos-lsp/crates/typos-lsp/tests/typos.toml'), -- Path to configuration file
+        diagnosticSeverity = "Error",                                                 -- Adjust based on your preference
     }
 }
 
--- -- Eslint
-config.eslint.setup {
+-- Eslint
+config.eslint.setup({
+    settings = {
+        experimental = {
+            useFlatConfig = true
+        },
+    },
     capabilities = capabilities,
-    flags = { debounce_text_changes = 500 },
-    on_attach = function(client)
+    flags = { debounce_text_changes = 1000, allow_incremental_sync = false },
+    on_attach = function(client, bufnr)
         client.server_capabilities.documentFormattingProvider = true
-        if client.server_capabilities.documentFormattingProvider then
-            local au_lsp = vim.api.nvim_create_augroup("eslint_lsp", { clear = true })
-            vim.api.nvim_create_autocmd("BufWritePost", {
-                pattern = "*",
-                callback = function()
-                    vim.lsp.buf.format { async = true }
-                end,
-                group = au_lsp,
-            })
-        end
+        local au_lsp = vim.api.nvim_create_augroup("eslint_d", { clear = true })
+        vim.api.nvim_create_autocmd("BufWritePost", {
+            pattern = "*",
+            callback = function()
+                vim.lsp.buf.format({ async = true })
+            end,
+            group = au_lsp,
+        })
     end,
-}
+})
 
 -- Keybindings for code actions
 vim.keymap.set("n", "K", vim.lsp.buf.hover, {})
@@ -144,4 +144,4 @@ vim.keymap.set("n", "gD", vim.lsp.buf.declaration)
 vim.keymap.set("n", "gd", vim.lsp.buf.definition)
 vim.keymap.set("n", "gi", vim.lsp.buf.implementation)
 vim.keymap.set("n", "gr", vim.lsp.buf.references)
-vim.keymap.set("n", "<leader>ca", vim.lsp.buf.code_action, {})
+vim.keymap.set("n", "<leader>dd", vim.lsp.buf.code_action, {})

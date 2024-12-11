@@ -45,4 +45,12 @@ if vim.g.neovide then
     vim.keymap.set({ "n", "v" }, "<C-+>", ":lua vim.g.neovide_scale_factor = vim.g.neovide_scale_factor + 0.1<CR>")
     vim.keymap.set({ "n", "v" }, "<C-->", ":lua vim.g.neovide_scale_factor = vim.g.neovide_scale_factor - 0.1<CR>")
     vim.keymap.set({ "n", "v" }, "<C-0>", ":lua vim.g.neovide_scale_factor = 1<CR>")
+
+    -- Paste and copy
+    vim.api.nvim_set_keymap('v', '<sc-c>', '"+y', {noremap = true})
+	vim.api.nvim_set_keymap('n', '<sc-v>', 'l"+P', {noremap = true})
+	vim.api.nvim_set_keymap('v', '<sc-v>', '"+P', {noremap = true})
+	vim.api.nvim_set_keymap('c', '<sc-v>', '<C-o>l<C-o>"+<C-o>P<C-o>l', {noremap = true})
+	vim.api.nvim_set_keymap('i', '<sc-v>', '<ESC>l"+Pli', {noremap = true})
+	vim.api.nvim_set_keymap('t', '<sc-v>', '<C-\\><C-n>"+Pi', {noremap = true})
 end

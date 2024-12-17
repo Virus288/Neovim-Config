@@ -1,5 +1,5 @@
 -- Init keybindings
-require("keybinding")
+require("keyOptions")
 
 -- Default options
 require "options"
@@ -34,3 +34,7 @@ lazy.setup({
   checker = { enabled = true },
   opts = {},
 })
+
+-- Init keybindings
+require("keybinding")
+

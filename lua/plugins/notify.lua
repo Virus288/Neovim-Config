@@ -13,7 +13,7 @@ return {
     end,
     config = function()
         local stages_util = require("notify.stages.util")
-        local direction = stages_util.DIRECTION.TOP_DOWN
+        local direction = stages_util.DIRECTION.BOTTOM_UP
 
         require("notify").setup({
             -- This is like a mix between fade_in_slide_out and fade

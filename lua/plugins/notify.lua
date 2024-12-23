@@ -16,10 +16,6 @@ return {
         local direction = stages_util.DIRECTION.BOTTOM_UP
 
         require("notify").setup({
-            -- This is like a mix between fade_in_slide_out and fade
-            -- But centered at the top, fading instead of "closing" to the side
-            -- And single bordered
-            -- Considered as closed on the last stage on a higher opacity than originally
             stages = {
                 function(state)
                     local next_height = state.message.height + 2

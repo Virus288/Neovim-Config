@@ -26,7 +26,6 @@ config.add({
   { "<C-0>", ':lua vim.g.neovide_scale_factor = 1<CR>', desc = "Reset zoom in neovide", mode = "v" },
 
   -- Formatting
-  { "<leader>gf", vim.lsp.buf.format, desc = "Format current file", mode = "n" },
   { "<leader>dd", vim.lsp.buf.code_action, desc = "Under cursor commands", mode = "n" },
 
   -- Keybindings for code actions

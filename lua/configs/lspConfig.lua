@@ -119,12 +119,12 @@ lspconfig.lua_ls.setup {
 -- })
 
 -- Typos and text checking
-lspconfig.typos_lsp.setup {
-    init_options = {
-        config = vim.fn.expand "~/code/typos-lsp/crates/typos-lsp/tests/typos.toml",
-        diagnosticSeverity = "Error",
-    },
-}
+-- lspconfig.typos_lsp.setup {
+--     init_options = {
+--         config = vim.fn.expand "~/code/typos-lsp/crates/typos-lsp/tests/typos.toml",
+--         diagnosticSeverity = "Error",
+--     },
+-- }
 
 -- Eslint
 lspconfig.eslint.setup {

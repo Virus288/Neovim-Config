@@ -6,7 +6,7 @@ return {
                 "lua-language-server",
                 "stylua",
                 "typescript-language-server",
-                "typos-lsp",
+                -- "typos-lsp",
                 "eslint-lsp",
             },
         },

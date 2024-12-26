@@ -22,7 +22,7 @@ hi Repeat guifg=#4D4D4D
 hi Operator guifg=#050505
 hi Structure guifg=#050505
 hi LineNr guifg=#737373 guibg=#F0F0F0
-hi CursorLineNr guifg=#050505 guibg=#F0F0F0
+hi CursorLineNr guifg=#050505 guibg=#DCDCDC
 hi VertSplit guifg=#7A7A7A guibg=#F0F0F0
 hi StatusLine guifg=#4D4D4D guibg=#CDCDCD
 hi StatusLineNC guifg=#7F7F7F guibg=#CDCDCD
@@ -49,7 +49,7 @@ hi Repeat guifg=#4D4D4D
 hi Operator guifg=#050505
 hi Structure guifg=#050505
 hi LineNr guifg=#737373 guibg=#F0F0F0
-hi CursorLineNr guifg=#050505 guibg=#F0F0F0
+hi CursorLineNr guifg=#050505 guibg=#DCDCDC
 hi VertSplit guifg=#7A7A7A guibg=#F0F0F0
 hi StatusLine guifg=#4D4D4D guibg=#CDCDCD
 hi StatusLineNC guifg=#7F7F7F guibg=#CDCDCD

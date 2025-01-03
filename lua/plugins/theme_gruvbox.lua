@@ -1,7 +1,7 @@
 return {
-  "ellisonleao/gruvbox.nvim",
-  priority = 1000,
-  config = function()
-    require "configs.gruvbox"
-  end,
+    "ellisonleao/gruvbox.nvim",
+    event = "VeryLazy",
+    config = function()
+        require "configs.gruvbox"
+    end,
 }

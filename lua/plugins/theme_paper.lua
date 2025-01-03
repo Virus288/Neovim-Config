@@ -1,4 +1,4 @@
 return {
-    "shaunsingh/nord.nvim",
+    "yorickpeterse/vim-paper",
     event = "VeryLazy"
 }

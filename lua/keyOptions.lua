@@ -9,6 +9,7 @@ vim.g.mapleader = " "
 vim.g.maplocalleader = "\\"
 
 vim.keymap.set("n", ";", ":", { silent = true, desc = "CMD enter command mode" })
+vim.keymap.set("v", ";", ":", { silent = true, desc = "CMD enter command mode" })
 vim.keymap.set("i", "jk", "<ESC>", { silent = true, desc = "Edit edit mode" })
 
 -- Yank to system clipboard

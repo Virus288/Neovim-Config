@@ -1,24 +1,27 @@
 return {
     {
         "williamboman/mason.nvim",
+        event = "VeryLazy",
         opts = {
             ensure_installed = {
                 "lua-language-server",
                 "stylua",
                 "typescript-language-server",
-                -- "typos-lsp",
+                "typos-lsp",
                 "eslint-lsp",
             },
         },
     },
     {
         "williamboman/mason-lspconfig.nvim",
+        event = "VeryLazy",
         config = function()
             require "configs.masonConfig"
         end
     },
     {
         "neovim/nvim-lspconfig",
+        event = "VeryLazy",
         opts = {
             inlay_hints = { enabled = true },
         },

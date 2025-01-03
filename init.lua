@@ -30,7 +30,7 @@ lazy.setup({
     spec = {
         { import = "plugins" },
     },
-    install = { colorscheme = { "paper" } },
+    install = { colorscheme = { "default" } },
     checker = { enabled = true },
     opts = {},
 })
@@ -39,5 +39,5 @@ lazy.setup({
 require("keybinding")
 
 -- Init colours
-vim.o.background = "light"
-vim.cmd.colorscheme "paper"
+vim.o.background = "dark"
+vim.cmd.colorscheme = "gruvbox"

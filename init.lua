@@ -30,7 +30,7 @@ lazy.setup({
     spec = {
         { import = "plugins" },
     },
-    install = { colorscheme = { "default" } },
+    install = { colorscheme = { "gruvbox" } },
     checker = { enabled = true },
     opts = {},
 })

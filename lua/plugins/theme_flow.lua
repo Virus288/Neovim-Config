@@ -1,11 +1,11 @@
 return {
   "0xstepit/flow.nvim",
-  lazy = false,
-  priority = 1000,
+  lazy = true,
+  -- priority = 1000,
   tag = "v2.0.1",
   opts = {
     theme = {
-      style = "light", --  "dark" | "light"
+      style = "dark", --  "dark" | "light"
       -- contrast = "dark", -- "default" | "high"
       transparent = false, -- true | false
     },
@@ -22,8 +22,8 @@ return {
       aggressive_spell = true, -- true | false
     },
   },
-  config = function(_, opts)
-    require("flow").setup(opts)
-    vim.cmd("colorscheme flow")
-  end,
+  -- config = function(_, opts)
+  --   require("flow").setup(opts)
+  --   vim.cmd("colorscheme flow")
+  -- end,
 }

@@ -1,5 +1,9 @@
 local function trigger_screensaver()
-  local options = {"scramble", "game_of_life", "water"}
+  if vim.fn.mode() == "c" then
+    return
+  end
+
+  local options = {"water", "game_of_life"}
   local target = options[math.random(#options)]
   vim.cmd("ScreenSaviour " .. target)
 end

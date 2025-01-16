@@ -48,6 +48,9 @@ opt.signcolumn = "yes" -- show the sign column
 -- opt.shortmess = "atToOFc" -- prompt message options
 opt.sidescrolloff = 8
 
+-- Disable mouse
+opt.mouse = ""
+
 -- Tab control
 opt.expandtab = true -- use spaces instead of tabs
 opt.smarttab = true -- tab respects 'tabstop', 'shiftwidth', and 'softtabstop'

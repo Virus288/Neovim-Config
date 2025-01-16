@@ -1,5 +1,5 @@
 return {
-  'tamton-aquib/zone.nvim',
+  'fazibear/screen_saviour.nvim',
   config = function ()
     require "configs.screenSaver"
   end

@@ -51,80 +51,30 @@ lspconfig.lua_ls.setup {
     },
 }
 
--- Typescript
--- lspconfig.ts_ls.setup {
---     init_options = {
---         preferences = {
---             disableSuggestions = false,
---             includeCompletionsForModuleExports = true,
---             includeCompletionsForImportStatements = true,
---             importModuleSpecifierPreference = "relative",
---         },
---     },
---     filetypes = {
---         "javascript",
---         "typescript",
---     },
---     settings = {
---         typescript = {
---             inlayHints = {
---                 includeInlayParameterNameHints = "all",
---                 includeInlayParameterNameHintsWhenArgumentMatchesName = true,
---                 includeInlayFunctionParameterTypeHints = true,
---                 includeInlayVariableTypeHints = true,
---                 includeInlayVariableTypeHintsWhenTypeMatchesName = true,
---                 includeInlayPropertyDeclarationTypeHints = true,
---                 includeInlayFunctionLikeReturnTypeHints = true,
---                 includeInlayEnumMemberValueHints = true,
---             },
---             experimental = {
---                 updateImportsOnPaste = true,
---                 enableProjectDiagnostics = true,
---             },
---             preferences = {
---                 preferTypeOnlyAutoImports = true,
---                 importModuleSpecifier = "relative",
---             },
---         },
---         javascript = {
---             inlayHints = {
---                 includeInlayParameterNameHints = "all",
---                 includeInlayParameterNameHintsWhenArgumentMatchesName = false,
---                 includeInlayFunctionParameterTypeHints = true,
---                 includeInlayVariableTypeHints = true,
---                 includeInlayVariableTypeHintsWhenTypeMatchesName = false,
---                 includeInlayPropertyDeclarationTypeHints = true,
---                 includeInlayFunctionLikeReturnTypeHints = true,
---                 includeInlayEnumMemberValueHints = true,
---             },
---         },
---     },
--- }
-
 -- Auto import missing files on save
--- vim.api.nvim_create_autocmd("BufWritePre", {
---     group = vim.api.nvim_create_augroup("TS_add_missing_imports", { clear = true }),
---     desc = "TS_add_missing_imports",
---     pattern = { "*.ts" },
---     callback = function()
---         vim.lsp.buf.code_action {
---             apply = true,
---             context = {
---                 diagnostics = {},
---                 only = { "refactor" },
---             },
---         }
---         vim.cmd "write"
---     end,
--- })
+vim.api.nvim_create_autocmd("BufWritePre", {
+    group = vim.api.nvim_create_augroup("TS_add_missing_imports", { clear = true }),
+    desc = "TS_add_missing_imports",
+    pattern = { "*.ts" },
+    callback = function()
+        vim.lsp.buf.code_action {
+            apply = true,
+            context = {
+                diagnostics = {},
+                only = { "refactor" },
+            },
+        }
+        vim.cmd "write"
+    end,
+})
 
 -- -- Typos and text checking -- I switched to alpine and it does not support this addon
--- lspconfig.typos_lsp.setup {
---     init_options = {
---         config = vim.fn.expand "~/code/typos-lsp/crates/typos-lsp/tests/typos.toml",
---         diagnosticSeverity = "Error",
---     },
--- }
+lspconfig.typos_lsp.setup {
+    init_options = {
+        config = vim.fn.expand "~/code/typos-lsp/crates/typos-lsp/tests/typos.toml",
+        diagnosticSeverity = "Error",
+    },
+}
 
 -- Eslint
 lspconfig.eslint.setup {

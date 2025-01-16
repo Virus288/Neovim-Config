@@ -7,7 +7,7 @@ return {
                 "lua-language-server",
                 "stylua",
                 "typescript-language-server",
-                -- "typos-lsp", -- I switched to alpine and it does not support this addon
+                "typos-lsp",
                 "eslint-lsp",
             },
         },

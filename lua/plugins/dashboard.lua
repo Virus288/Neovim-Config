@@ -7,7 +7,7 @@ return {
             config = {
                 header = {
                     [[ _______________________________ ]],
-                    [[< Keep calm and don't cry >]],
+                    [[< Keep calm and release the duck! >]],
                     [[ ------------------------------- ]],
                     [[  \   ^__^                       ]],
                     [[   \  (oo)\_______               ]],

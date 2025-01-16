@@ -1,8 +1,0 @@
-return {
-  'fazibear/screen_saviour.nvim',
-  config = function ()
-    require "configs.screenSaver"
-  end
-}
-
--- This plugin seems to be consuming fon't of cpu power. 

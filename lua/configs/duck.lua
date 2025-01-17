@@ -1,5 +1,7 @@
+local should_honk=true
+
 local function trigger_screensaver()
-  if vim.fn.mode() == "c" then
+  if vim.fn.mode() == "c" or vim.fn.mode() == "t" or should_honk == false then
     return
   end
 
@@ -10,7 +12,7 @@ local inactivity_timer = vim.loop.new_timer()
 
 local function reset_inactivity_timer()
   inactivity_timer:stop()
-  inactivity_timer:start(10000, 0, vim.schedule_wrap(trigger_screensaver))
+  inactivity_timer:start(30000, 0, vim.schedule_wrap(trigger_screensaver))
 end
 
 vim.api.nvim_create_autocmd({"CursorMoved", "CursorMovedI", "BufWritePost", "TextChanged", "TextChangedI"}, {
@@ -21,28 +23,30 @@ reset_inactivity_timer()
 
 vim.keymap.set('n', '<leader>mq', function() require("duck").hatch() end, {})
 vim.keymap.set('n', '<leader>mw', function() require("duck").cook() end, {})
-vim.keymap.set('n', '<leader>me', function() require("duck").cook_all() end, {})
+vim.keymap.set('n', '<leader>me', function()
+  inactivity_timer:stop()
+  should_honk = false
+  vim.notify('The ducks has been stopped. For now...', vim.log.levels.INFO)
+end, {})
 
 -- Below hooks are required, because duck plugin seems to be throwing hundreds of errors on resize / :q, making neovim unusable
 
--- Kill ducks on leave
+-- Kill duck on leave
 vim.api.nvim_create_autocmd("VimLeavePre", {
   callback = function()
     local status_ok, duck = pcall(require, "duck")
-    if status_ok and duck and duck.cook_all then
-      duck.cook_all()
+    if status_ok and duck and duck.cook then
+      duck.cook()
     end
   end,
-  desc = "Cook all ducks before exiting Neovim",
 })
 
--- Kill ducs on window resize
+-- Kill duck on window resize
 vim.api.nvim_create_autocmd("VimResized", {
   callback = function()
     local status_ok, duck = pcall(require, "duck")
-    if status_ok and duck and duck.cook_all then
-      duck.cook_all()
+    if status_ok and duck and duck.cook then
+      duck.cook()
     end
   end,
-  desc = "Cook all ducks on window resize",
 })

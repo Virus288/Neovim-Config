@@ -41,3 +41,10 @@ require("keybinding")
 -- Init colours
 vim.o.background = "dark"
 vim.cmd.colorscheme = "gruvbox"
+
+-- Show keys on startup
+vim.api.nvim_create_autocmd("VimEnter", {
+    callback = function()
+        vim.cmd("ShowkeysToggle")
+    end
+})

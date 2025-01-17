@@ -1,5 +1,5 @@
 local function trigger_screensaver()
-  if vim.fn.mode() == "c" then
+  if vim.fn.mode() == "c" or vim.fn.mode() == "t" then
     return
   end
 
@@ -21,6 +21,10 @@ reset_inactivity_timer()
 
 vim.keymap.set('n', '<leader>mq', function() require("goose").hatch() end, {})
 vim.keymap.set('n', '<leader>mw', function() require("goose").cook() end, {})
+vim.keymap.set('n', '<leader>me', function()
+  inactivity_timer:stop()
+  vim.notify('The goose has been stopped. For now...', vim.log.levels.INFO)
+end, {})
 
 -- Below hooks are required, because goose plugin seems to be throwing hundreds of errors on resize / :q, making neovim unusable
 
@@ -43,4 +47,3 @@ vim.api.nvim_create_autocmd("VimResized", {
     end
   end,
 })
-

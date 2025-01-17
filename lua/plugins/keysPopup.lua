@@ -4,7 +4,7 @@ return {
   opts = {
     timeout = 1,
     maxkeys = 5,
-    position = "top-center",
+    position = "bottom-right",
     show_count = true
   }
 }

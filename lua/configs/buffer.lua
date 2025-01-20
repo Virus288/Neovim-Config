@@ -1,3 +1,17 @@
+-- Show keys and colors on startup
+vim.api.nvim_create_autocmd("VimEnter", {
+    callback = function()
+        vim.defer_fn(function()
+            vim.o.background = "light"
+            vim.cmd('colorscheme gruvbox')
+        end, 100)
+    end
+})
+
+-- Set colorscheme before Bufferline setup
+vim.o.background = "light"
+vim.cmd('colorscheme gruvbox')
+
 local config = require "bufferline"
 
 config.setup {
@@ -14,18 +28,26 @@ config.setup {
             icon = "▎",
             style = "icon",
         },
-        buffer_close_icon = "󰅖",
+        buffer_close_icon = "",
         modified_icon = "● ",
-        close_icon = " ",
-        left_trunc_marker = " ",
-        right_trunc_marker = " ",
+        close_icon = " ",
+        left_trunc_marker = " ",
+        right_trunc_marker = " ",
         max_name_length = 18,
         max_prefix_length = 15, -- prefix used when a buffer is de-duplicated
         truncate_names = true, -- whether or not tab names should be truncated
         tab_size = 18,
-        diagnostics = false,
-        diagnostics_update_in_insert = false, -- only applies to coc
+        diagnostics = "nvim_lsp",
         diagnostics_update_on_event = true, -- use nvim's diagnostic handler
+        diagnostics_indicator = function(count, level, diagnostics_dict, context)
+            local s = " "
+            for e, n in pairs(diagnostics_dict) do
+                local sym = e == "error" and " "
+                or (e == "warning" and " " or " ")
+                s = s .. n .. sym
+            end
+            return s
+        end,
         custom_filter = function(buf_number, buf_numbers)
             if vim.bo[buf_number].filetype ~= "<i-dont-want-to-see-this>" then
                 return true

@@ -38,13 +38,11 @@ lazy.setup({
 -- Init keybindings
 require("keybinding")
 
--- Init colours
-vim.o.background = "dark"
-vim.cmd.colorscheme = "gruvbox"
-
 -- Show keys on startup
 vim.api.nvim_create_autocmd("VimEnter", {
     callback = function()
         vim.cmd("ShowkeysToggle")
     end
 })
+
+-- Theme initialization was moved to 'lua/configs/buffer.lua', due to issues with coloring bufferline

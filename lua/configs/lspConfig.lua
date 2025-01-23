@@ -77,9 +77,15 @@ lspconfig.typos_lsp.setup {
 }
 
 -- Eslint
+local function use_flat_config()
+    local flat_config_file = vim.fn.glob("eslint.config.mjs")
+    return flat_config_file ~= ""
+end
+
 lspconfig.eslint.setup {
     settings = {
         codeAction = {
+
             showDocumentation = {
                 enable = false
             }
@@ -89,7 +95,7 @@ lspconfig.eslint.setup {
             mode = "all"
         },
         experimental = {
-            useFlatConfig = true,
+            useFlatConfig = use_flat_config(),
         },
         format = true,
         nodePath = "",

@@ -31,7 +31,7 @@ config.setup {
     },
     actions = {
         open_file = {
-            resize_window = true
+            resize_window = false
         }
     }
 }

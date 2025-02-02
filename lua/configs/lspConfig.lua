@@ -51,6 +51,15 @@ lspconfig.lua_ls.setup {
     },
 }
 
+-- C++
+lspconfig.clangd.setup {
+  on_attach = function(client, bufnr)
+    client.server_capabilities.signatureHelpProvider = false
+    -- on_attach(client, bufnr)
+  end,
+  capabilities = capabilities,
+}
+
 -- Auto import missing files on save
 vim.api.nvim_create_autocmd("BufWritePre", {
     group = vim.api.nvim_create_augroup("TS_add_missing_imports", { clear = true }),

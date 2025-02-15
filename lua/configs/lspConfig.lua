@@ -53,12 +53,28 @@ lspconfig.lua_ls.setup {
 
 -- C++
 lspconfig.clangd.setup {
+  cmd = { "clangd", "--clang-tidy", "--compile-commands-dir=./" },
   on_attach = function(client, bufnr)
     client.server_capabilities.signatureHelpProvider = false
-    -- on_attach(client, bufnr)
+
+    vim.api.nvim_create_autocmd("BufWritePre", {
+      buffer = bufnr,
+      callback = function()
+        vim.lsp.buf.format()
+      end,
+    })
   end,
   capabilities = capabilities,
+  root_dir = function(fname)
+    local compile_commands_json = vim.fn.findfile('compile_commands.json', fname .. ';build/')
+    if compile_commands_json ~= "" then
+      return vim.fn.fnamemodify(compile_commands_json, ":p:h")
+    else
+      return lspconfig.util.root_pattern(".git")(fname)
+    end
+  end,
 }
+
 
 -- Auto import missing files on save
 vim.api.nvim_create_autocmd("BufWritePre", {

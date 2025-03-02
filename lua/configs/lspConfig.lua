@@ -75,6 +75,8 @@ lspconfig.clangd.setup {
   end,
 }
 
+-- QML
+lspconfig.qmlls.setup{}
 
 -- Auto import missing files on save
 vim.api.nvim_create_autocmd("BufWritePre", {

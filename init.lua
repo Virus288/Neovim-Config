@@ -46,3 +46,11 @@ vim.api.nvim_create_autocmd("VimEnter", {
 })
 
 -- Theme initialization was moved to 'lua/configs/buffer.lua', due to issues with coloring bufferline
+
+-- Set transparent background
+function Transparent()
+  vim.cmd [[
+    highlight Normal guibg=NONE ctermbg=NONE
+    highlight NonText guibg=NONE ctermbg=NONE
+  ]]
+end

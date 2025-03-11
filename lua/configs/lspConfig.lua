@@ -103,6 +103,10 @@ lspconfig.typos_lsp.setup {
     },
 }
 
+lspconfig.gh_actions_ls.setup{
+    filetypes = { 'yaml', "yml" },
+}
+
 -- Eslint
 local function use_flat_config()
     local flat_config_file = vim.fn.glob("eslint.config.mjs")

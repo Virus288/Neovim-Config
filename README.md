@@ -10,5 +10,9 @@ Github actions lsp:
 npm install -g gh-actions-language-server
 ```
 
+In order to install qmlls, install qt6-declarative and add this to path:
+```
+export PATH="/usr/lib/qt6/bin:$PATH"
+```
 
 

@@ -2,7 +2,7 @@ require("typescript-tools").setup {
     settings = {
         separate_diagnostic_server = true,
         publish_diagnostic_on = "insert_leave",
-        expose_as_code_action = { "all" },
+        -- expose_as_code_action = { "all" },
         tsserver_path = nil,
         tsserver_plugins = {},
         tsserver_max_memory = "auto",

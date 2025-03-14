@@ -52,6 +52,14 @@ function Transparent()
   vim.cmd [[
     highlight Normal guibg=NONE ctermbg=NONE
     highlight NonText guibg=NONE ctermbg=NONE
+    highlight NormalFloat guibg=NONE ctermbg=NONE
     highlight NvimTreeNormal guibg=NONE ctermbg=NONE
+    highlight EndOfBuffer guibg=NONE ctermbg=NONE
+    highlight VertSplit guibg=NONE ctermbg=NONE
+    highlight StatusLine guibg=NONE ctermbg=NONE
+    highlight StatusLineNC guibg=NONE ctermbg=NONE
+    highlight WinSeparator guibg=NONE ctermbg=NONE
+    highlight LineNr guibg=NONE ctermbg=NONE
+    highlight CursorLineNr guibg=NONE ctermbg=NONE
   ]]
 end

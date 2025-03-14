@@ -21,7 +21,7 @@ capabilities.textDocument.completion.completionItem = {
 
 local servers = {
     'lua_ls',
-	-- 'ts_ls'
+	'ts_ls'
 }
 
 for _, lsp in ipairs(servers) do
@@ -78,22 +78,22 @@ lspconfig.clangd.setup {
 -- QML
 lspconfig.qmlls.setup{}
 
--- Auto import missing files on save
-vim.api.nvim_create_autocmd("BufWritePre", {
-    group = vim.api.nvim_create_augroup("TS_add_missing_imports", { clear = true }),
-    desc = "TS_add_missing_imports",
-    pattern = { "*.ts" },
-    callback = function()
-        vim.lsp.buf.code_action {
-            apply = true,
-            context = {
-                diagnostics = {},
-                only = { "refactor" },
-            },
-        }
-        vim.cmd "write"
-    end,
-})
+-- Auto import missing files on save - Disabled, because tsconfig should auto start
+-- vim.api.nvim_create_autocmd("BufWritePre", {
+--     group = vim.api.nvim_create_augroup("TS_add_missing_imports", { clear = true }),
+--     desc = "TS_add_missing_imports",
+--     pattern = { "*.ts" },
+--     callback = function()
+--         vim.lsp.buf.code_action {
+--             apply = true,
+--             context = {
+--                 diagnostics = {},
+--                 only = { "refactor" },
+--             },
+--         }
+--         vim.cmd "write"
+--     end,
+-- })
 
 -- -- Typos and text checking -- I switched to alpine and it does not support this addon
 lspconfig.typos_lsp.setup {

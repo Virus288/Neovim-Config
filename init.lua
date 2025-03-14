@@ -52,5 +52,6 @@ function Transparent()
   vim.cmd [[
     highlight Normal guibg=NONE ctermbg=NONE
     highlight NonText guibg=NONE ctermbg=NONE
+    highlight NvimTreeNormal guibg=NONE ctermbg=NONE
   ]]
 end

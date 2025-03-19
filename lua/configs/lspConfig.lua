@@ -165,3 +165,12 @@ vim.keymap.set("n", "gd", vim.lsp.buf.definition, { desc = 'Go to definition' })
 vim.keymap.set("n", "gi", vim.lsp.buf.implementation, { desc = "Go to implementation" })
 vim.keymap.set("n", "gr", vim.lsp.buf.references, { desc = "Go to reference" })
 vim.keymap.set("n", "<leader>dd", vim.lsp.buf.code_action, { desc = "Under cursor commands" })
+
+-- Force inline hints to show. For some reason, they wouldn't show on wsl
+vim.diagnostic.config({
+    virtual_text = true,
+    signs = true,
+    underline = true,
+    update_in_insert = false,
+})
+

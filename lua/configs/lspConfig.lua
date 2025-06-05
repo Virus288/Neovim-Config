@@ -20,8 +20,7 @@ capabilities.textDocument.completion.completionItem = {
 }
 
 local servers = {
-    'lua_ls',
-	'ts_ls'
+    'lua_ls'
 }
 
 for _, lsp in ipairs(servers) do

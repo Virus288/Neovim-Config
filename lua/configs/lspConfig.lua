@@ -171,5 +171,5 @@ vim.diagnostic.config({
 
 -- Custom keymaps
 vim.keymap.set('v', '<leader>fj', function()
-  vim.cmd("'<,'>!jq")
+  vim.cmd("'<,'>!jq")
 end, { noremap = true, silent = true, desc = "Format json" })

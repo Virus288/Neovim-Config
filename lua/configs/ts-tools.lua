@@ -1,4 +1,9 @@
 require("typescript-tools").setup {
+    on_attach = function ()
+        if vim.lsp.inlay_hint and vim.lsp.inlay_hint.enable then
+            vim.lsp.inlay_hint.enable(true, bufnr)
+        end
+    end,
     settings = {
         separate_diagnostic_server = true,
         publish_diagnostic_on = "insert_leave",

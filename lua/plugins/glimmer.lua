@@ -1,7 +1,6 @@
 return {
     "rachartier/tiny-glimmer.nvim",
     event = "TextYankPost",
-    lazy = true,
     opts = {
       enabled = true,
       default_animation = "pulse",

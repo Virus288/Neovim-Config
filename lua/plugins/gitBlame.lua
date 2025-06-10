@@ -1,7 +1,6 @@
 return {
     "f-person/git-blame.nvim",
     event = "VeryLazy",
-    lazy = true,
     opts = {
         enabled = true,
         message_template = " <summary> • <date> • <author> • <<sha>>",

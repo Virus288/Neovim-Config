@@ -167,7 +167,3 @@ vim.diagnostic.config({
     update_in_insert = false,
 })
 
-
--- Custom keymaps
-vim.keymap.set('v', '<leader>fj', ":%!jq<CR>", { noremap = true, silent = true, desc = "Format json" })
-

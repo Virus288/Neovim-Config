@@ -15,6 +15,11 @@ vim.keymap.set('n', '<leader>zc', ':normal! zc<CR>', { silent = true, desc = 'Fo
 vim.keymap.set('n', '<leader>zo', ':normal! zo<CR>', { silent = true, desc = 'Fold text' })
 vim.keymap.set('n', '<leader>za', ':normal! za<CR>', { silent = true, desc = 'Fold text' })
 
+-- Formatting
+vim.keymap.set('n', '<leader>fd', '', { noremap = true, silent = true, desc = 'Format file' })
+vim.keymap.set('n', '<leader>fdj', ':%!jq .', { noremap = true, silent = true, desc = 'Format json' })
+vim.keymap.set('v', '<leader>fdj', ":%!jq<CR>", { noremap = true, silent = true, desc = "Format json" })
+
 -- Neovide
 if vim.g.neovide then
     vim.g.neovide_scale_factor = 0.8 -- Set default scale factory to be 0.8, because its zoomed way more than neovim itself

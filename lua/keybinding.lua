@@ -24,16 +24,21 @@ vim.keymap.set('v', '<leader>fdj', ":%!jq<CR>", { noremap = true, silent = true,
 if vim.g.neovide then
     vim.g.neovide_scale_factor = 0.8 -- Set default scale factory to be 0.8, because its zoomed way more than neovim itself
     vim.keymap.set({ "n", "v" }, "<C-+>", ":lua vim.g.neovide_scale_factor = vim.g.neovide_scale_factor + 0.1<CR>")
+
     vim.keymap.set({ "n", "v" }, "<C-->", ":lua vim.g.neovide_scale_factor = vim.g.neovide_scale_factor - 0.1<CR>")
     vim.keymap.set({ "n", "v" }, "<C-0>", ":lua vim.g.neovide_scale_factor = 1<CR>")
 
     vim.g.neovide_window_blurred = true
 
-    -- Paste and copy
-    vim.api.nvim_set_keymap('v', '<sc-c>', '"+y', { noremap = true })
-    vim.api.nvim_set_keymap('n', '<sc-v>', 'l"+P', { noremap = true })
-    vim.api.nvim_set_keymap('v', '<sc-v>', '"+P', { noremap = true })
-    vim.api.nvim_set_keymap('c', '<sc-v>', '<C-o>l<C-o>"+<C-o>P<C-o>l', { noremap = true })
-    vim.api.nvim_set_keymap('i', '<sc-v>', '<ESC>l"+Pli', { noremap = true })
-    vim.api.nvim_set_keymap('t', '<sc-v>', '<C-\\><C-n>"+Pi', { noremap = true })
+    -- Copy to system clipboard
+    vim.keymap.set({ "n", "x" }, "<C-S-C>", '"+y', { desc = "Copy to system clipboard", noremap = true })
+    vim.api.nvim_set_keymap('v', '<S-C>', '"+y', { noremap = true })
+
+    -- Paste from system clipboard
+    vim.keymap.set({ "n", "x" }, "<C-S-V>", '"+p', { desc = "Paste from system clipboard", noremap = true })
+    vim.api.nvim_set_keymap('n', '<S-V>', '"+P', { noremap = true })
+    vim.api.nvim_set_keymap('v', '<S-V>', '"+P', { noremap = true })
+    vim.api.nvim_set_keymap('c', '<S-V>', '<C-r>+', { noremap = true })
+    vim.api.nvim_set_keymap('t', '<S-V>', '<C-\\><C-n>"+pi', { noremap = true })
+    vim.keymap.set("i", "<C-S-V>", '<Esc>"+pa', { desc = "Paste from clipboard in insert mode", noremap = true })
 end

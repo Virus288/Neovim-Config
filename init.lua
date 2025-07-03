@@ -62,12 +62,14 @@ function Transparent()
     highlight LineNr guibg=NONE ctermbg=NONE
     highlight CursorLineNr guibg=NONE ctermbg=NONE
   ]]
+  if vim.g.neovide then
+    vim.g.neovide_transparency = 0.7
+  end
 end
 
 -- Set neovide fullscreen
 function Toggle_neovide_fullscreen()
   if vim.g.neovide_fullscreen then
-
     vim.g.neovide_fullscreen = false
   else
     vim.g.neovide_fullscreen = true
